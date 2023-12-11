@@ -1,7 +1,8 @@
 import TabButton from "./components/TabButton";
 import image from "./assets/react-core-concepts.png";
 import CoreConcept from "./components/CoreConcept";
-import { CORE_CONCEPTS } from "./data";
+import { CORE_CONCEPTS, EXAMPLES } from "./data";
+import { useState } from "react";
 
 const comp = ["Fundamental", "Crucial", "Core"];
 
@@ -22,6 +23,15 @@ function Header(){
 }
 
 function App() {
+
+  const [val,setVal] = useState("Components");
+  function handleClick(value){
+    console.log("I am Clicked "+ value);
+    setVal(value);
+    console.log({val}+" "+EXAMPLES[{val}]);
+    console.log({val});
+  }
+
   return (
     <div>
       <Header />
@@ -36,11 +46,17 @@ function App() {
           </ul>
           
          </section>
-      <section id="examples">
-        <menu>
-         <TabButton {...CORE_CONCEPTS[0]}></TabButton>
-         </menu>
-      </section>
+        <section id="examples">
+          <menu>
+            <TabButton onSelect = {() => handleClick('Components')}>Components</TabButton>
+            <TabButton onSelect = {() => handleClick('JSX')}>JSX</TabButton>
+            <TabButton onSelect = {() => handleClick('Props')}>Props</TabButton>
+            <TabButton onSelect = {() => handleClick('State')}>State</TabButton>
+          </menu>
+          <p>{val}</p>
+          console.log({val}+" "+EXAMPLES[{val}]);
+
+        </section>
       </main>
     </div>
   );
